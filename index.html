@@ -83,7 +83,20 @@
 
     /* עוגנים חלקים */
     html { scroll-behavior: smooth; }
-  </style>
+    /* --- גלריית תמונות קולנועית --- */
+    .gallery { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:1rem; margin-top:1rem; }
+    .gallery-card { position:relative; overflow:hidden; border-radius:1rem; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04); box-shadow:0 10px 30px rgba(0,0,0,.35); }
+    .gallery-img { display:block; width:100%; height:220px; object-fit:cover; filter:contrast(1.05) saturate(.9); transition: transform .5s ease, filter .5s ease; }
+    .gallery-card::after { content:""; position:absolute; inset:0; box-shadow: inset 0 0 120px 30px rgba(0,0,0,.55); pointer-events:none; }
+    .gallery-card:hover .gallery-img { transform:scale(1.05); filter:contrast(1.12) saturate(1); }
+    .credit { position:absolute; inset:auto 0 0 0; padding:.5rem .65rem; background: linear-gradient(180deg, transparent, rgba(0,0,0,.75)); color:#dcdcdc; font-size:.85rem; text-align:start; }
+    .credit small{ opacity:.8; }
+    /* פריסת בלוק נפרדת אם מוטמע כסטנדאלון */
+    .section-shell { max-width:1100px; margin:0 auto; padding:2rem 1rem 3rem; }
+  /* --- פורטרט ב-Hero --- */
+    .hero-portrait{ width:148px; height:148px; border-radius:999px; object-fit:cover; display:inline-block; margin:.9rem auto .4rem; border:2px solid rgba(255,255,255,.18); box-shadow:0 12px 40px rgba(0,0,0,.55), 0 0 0 6px rgba(229,9,20,.08); background:radial-gradient(60% 60% at 50% 40%, rgba(255,255,255,.06), rgba(0,0,0,.0)); }
+    .hero-portrait-wrap{ display:grid; place-items:center; }
+</style>
 </head>
 <body>
   <nav class="nav" aria-label="ראשי">
@@ -102,6 +115,9 @@
     <div class="film-frame" aria-hidden="true"></div>
     <div class="hero-inner">
       <span class="eyebrow">קולנוע קלאסי. סיפורים בני-זמן. קהל אנושי.</span>
+      <div class="hero-portrait-wrap">
+        <img class="hero-portrait" src="assets/img/TOMER.png" alt="תומר קמרלינג" loading="eager"/>
+      </div>
       <h1>תומר קמרלינג — מבקר ומרצה לקולנוע</h1>
       <p class="lead">הרצאות חכמות, משעשעות ומלאות אהבת קולנוע: איך סרטים נוצרים, למה הם מרגשים אותנו, ומה הם אומרים על העולם.</p>
       <p><a class="cta" href="#booking" aria-label="דילוג לטופס הזמנת הרצאה">הזמינו הרצאה</a></p>
@@ -257,6 +273,43 @@
           <button class="cta" type="submit">שלחו בקשה</button>
         </div>
       </form>
+    </section>
+      <!-- גלריית תמונות קולנועית -->
+    <section id="gallery" aria-labelledby="gallery-title">
+      <h2 id="gallery-title">ויז׳ואלס קולנועיים</h2>
+      <p>אוסף תמונות חופשיות לשימוש בעיצוב האתר. אפשר להציג כרקע, כאלמנט דקורטיבי, או לשלב בתוך טקסט.</p>
+      <div class="gallery">
+        <!-- דוגמאות: עדכני את נתיבי הקבצים לפי המיקום בריפו (למשל assets/img/...) -->
+        <figure class="gallery-card">
+          <img class="gallery-img" src="assets/img/filmstrip.jpg" alt="רצועת פילם שחור-לבן בזווית" loading="lazy" />
+          <figcaption class="credit">רצועת פילם — <small>Public Domain / CC0</small></figcaption>
+        </figure>
+        <figure class="gallery-card">
+          <img class="gallery-img" src="assets/img/film.jpg" alt="פסי פילם בסליל מטושטש" loading="lazy" />
+          <figcaption class="credit">סליל פילם — <small>שימוש חופשי</small></figcaption>
+        </figure>
+        <figure class="gallery-card">
+          <img class="gallery-img" src="assets/img/filmklappe.webp" alt="קלפרבורד שחור-לבן" loading="lazy" />
+          <figcaption class="credit">קלפרבורד — <small>שימוש חופשי</small></figcaption>
+        </figure>
+        <figure class="gallery-card">
+          <img class="gallery-img" src="assets/img/istockphoto.webp" alt="מרקם בוקה כהה בסגנון פילם" loading="lazy" />
+          <figcaption class="credit">מרקם פילם — <small>שימוש חופשי</small></figcaption>
+        </figure>
+        <figure class="gallery-card">
+          <img class="gallery-img" src="assets/img/movie.jpg" alt="חדר הקרנה ישן וסלילי פילם" loading="lazy" />
+          <figcaption class="credit">חדר הקרנה — <small>שימוש חופשי</small></figcaption>
+        </figure>
+        <figure class="gallery-card">
+          <img class="gallery-img" src="assets/img/projector.jpg" alt="עדשת מקרן זהובה וינטאז׳" loading="lazy" />
+          <figcaption class="credit">עדשת מקרן — <small>שימוש חופשי</small></figcaption>
+        </figure>
+        <!-- תמונת תומר (עם רקע שקוף) לשילוב בפינות האתר או ב-Hero -->
+        <figure class="gallery-card">
+          <img class="gallery-img" src="assets/img/TOMER.png" alt="תומר קמרלינג" loading="lazy" style="object-fit:contain; background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));" />
+          <figcaption class="credit">תומר קמרלינג — פורטרט</figcaption>
+        </figure>
+      </div>
     </section>
   </main>
 
