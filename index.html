@@ -96,6 +96,34 @@
   /* --- פורטרט ב-Hero --- */
     .hero-portrait{ width:148px; height:148px; border-radius:999px; object-fit:cover; display:inline-block; margin:.9rem auto .4rem; border:2px solid rgba(255,255,255,.18); box-shadow:0 12px 40px rgba(0,0,0,.55), 0 0 0 6px rgba(229,9,20,.08); background:radial-gradient(60% 60% at 50% 40%, rgba(255,255,255,.06), rgba(0,0,0,.0)); }
     .hero-portrait-wrap{ display:grid; place-items:center; }
+  /* --- שדרוג עיצוב עם התמונות שסיפקת --- */
+    /* Hero עם רקע מקרן קולנוע */
+    .hero { background: url('assets/img/projector.jpg') center/cover no-repeat fixed; }
+    /* שכבת גריין עדינה מעל ה-Hero */
+    .hero::before { background-image: radial-gradient(120% 70% at 50% -10%, rgba(255,220,160,.12), rgba(10,10,10,0) 60%),
+      radial-gradient(90% 60% at 50% 110%, rgba(255,120,120,.08), rgba(10,10,10,0) 60%),
+      linear-gradient(to bottom, rgba(0,0,0,.0), rgba(0,0,0,.25)); }
+    .hero::after { background-image: linear-gradient(0deg, rgba(0,0,0,.55), rgba(0,0,0,.55)); }
+
+    /* אייקון קלפר לפני כותרות סעיפים */
+    h2 { position: relative; padding-inline-start: 2rem; }
+    h2::before { content: ""; position: absolute; inset: .15rem auto auto 0; width: 22px; height: 22px; background: url('assets/img/filmklappe.webp') center/contain no-repeat; filter: drop-shadow(0 2px 6px rgba(0,0,0,.3)); }
+
+    /* פסי פילם בראש/בסוף כל סעיף בולטים */
+    .section-film { position: relative; }
+    .section-film::before, .section-film::after { content:""; position:absolute; left:0; right:0; height:24px; background: url('assets/img/filmstrip.jpg') 0 0/300px 24px repeat-x; opacity:.22; }
+    .section-film::before { top:-6px; }
+    .section-film::after { bottom:-6px; transform: scaleY(-1); }
+
+    /* רקעי תמונה רכים לסעיפים ספציפיים */
+    #topics { background: linear-gradient(0deg, rgba(10,10,10,.86), rgba(10,10,10,.86)), url('assets/img/movie.jpg') center/cover fixed; }
+    #work   { background: linear-gradient(0deg, rgba(10,10,10,.9),  rgba(10,10,10,.9)),  url('assets/img/film.jpg') center/cover fixed; }
+
+    /* פורטרט קטן גם באזור האודות (בנוסף ל-Hero) */
+    .about-portrait { width: 160px; height:160px; object-fit:cover; border-radius: 1rem; border:1px solid rgba(255,255,255,.16); box-shadow: 0 10px 30px rgba(0,0,0,.35); background:radial-gradient(60% 60% at 50% 40%, rgba(255,255,255,.05), rgba(0,0,0,0)); }
+
+    /* טקסטורה כללית קלה לעמודים ארוכים (באה מה-istockphoto.webp) */
+    body::after { content:""; position:fixed; inset:0; pointer-events:none; background: url('assets/img/istockphoto.webp') center/cover no-repeat; mix-blend-mode: overlay; opacity:.05; }
 </style>
 </head>
 <body>
@@ -131,7 +159,7 @@
   </header>
 
   <main>
-    <section id="about" aria-labelledby="about-title">
+    <section id="about" class="section-film" aria-labelledby="about-title">
       <h2 id="about-title">אודות תומר</h2>
       <div class="grid cols-2">
         <div class="card">
@@ -142,6 +170,13 @@
           <p>
             כאן באתר תמצאו נושאי הרצאות זמינים, מידע לוגיסטי להזמנה, וקישורים לדוגמאות כתיבה וביקורות.
           </p>
+          <div style="display:flex; gap:1rem; align-items:center; margin-top:1rem;">
+            <img class="about-portrait" src="assets/img/TOMER.png" alt="תומר קמרלינג" loading="lazy"/>
+            <div style="opacity:.85; font-size:.95rem;">
+              <div><strong>דגש סגנוני:</strong> קולנוע קלאסי, סיפורים בני-זמן, קהל אנושי.</div>
+              <div>תומר מביא קטעי וידאו, שיחה פתוחה וחוויית צפייה חיה.</div>
+            </div>
+          </div>
         </div>
         <div class="card">
           <h3 style="margin-top:0">למי זה מתאים?</h3>
@@ -155,7 +190,7 @@
       </div>
     </section>
 
-    <section id="topics" aria-labelledby="topics-title">
+    <section id="topics" class="section-film" aria-labelledby="topics-title">
       <h2 id="topics-title">נושאי הרצאות</h2>
       <div class="grid cols-2">
         <article class="card">
@@ -185,7 +220,7 @@
       </div>
     </section>
 
-    <section id="format" aria-labelledby="format-title">
+    <section id="format" class="section-film" aria-labelledby="format-title">
       <h2 id="format-title">פורמט ולוגיסטיקה</h2>
       <div class="grid cols-2">
         <div class="card">
@@ -204,7 +239,7 @@
       </div>
     </section>
 
-    <section id="work" aria-labelledby="work-title">
+    <section id="work" class="section-film" aria-labelledby="work-title">
       <h2 id="work-title">עבודות נבחרות וקישורים</h2>
       <div class="card">
         <p class="links">
@@ -216,7 +251,7 @@
       </div>
     </section>
 
-    <section id="booking" aria-labelledby="booking-title">
+    <section id="booking" class="section-film" aria-labelledby="booking-title">
       <h2 id="booking-title">הזמנת הרצאה</h2>
       <p>מלאו את הטופס ונחזור אליכם בהקדם. ניתן גם לציין תאריך מועדף והערות לוגיסטיות.</p>
       <!-- טופס תואם Netlify: כאשר תפרסי ל-Netlify, הטופס יקלוט פניות בלי שרת -->
@@ -275,42 +310,7 @@
       </form>
     </section>
       <!-- גלריית תמונות קולנועית -->
-    <section id="gallery" aria-labelledby="gallery-title">
-      <h2 id="gallery-title">ויז׳ואלס קולנועיים</h2>
-      <p>אוסף תמונות חופשיות לשימוש בעיצוב האתר. אפשר להציג כרקע, כאלמנט דקורטיבי, או לשלב בתוך טקסט.</p>
-      <div class="gallery">
-        <!-- דוגמאות: עדכני את נתיבי הקבצים לפי המיקום בריפו (למשל assets/img/...) -->
-        <figure class="gallery-card">
-          <img class="gallery-img" src="assets/img/filmstrip.jpg" alt="רצועת פילם שחור-לבן בזווית" loading="lazy" />
-          <figcaption class="credit">רצועת פילם — <small>Public Domain / CC0</small></figcaption>
-        </figure>
-        <figure class="gallery-card">
-          <img class="gallery-img" src="assets/img/film.jpg" alt="פסי פילם בסליל מטושטש" loading="lazy" />
-          <figcaption class="credit">סליל פילם — <small>שימוש חופשי</small></figcaption>
-        </figure>
-        <figure class="gallery-card">
-          <img class="gallery-img" src="assets/img/filmklappe.webp" alt="קלפרבורד שחור-לבן" loading="lazy" />
-          <figcaption class="credit">קלפרבורד — <small>שימוש חופשי</small></figcaption>
-        </figure>
-        <figure class="gallery-card">
-          <img class="gallery-img" src="assets/img/istockphoto.webp" alt="מרקם בוקה כהה בסגנון פילם" loading="lazy" />
-          <figcaption class="credit">מרקם פילם — <small>שימוש חופשי</small></figcaption>
-        </figure>
-        <figure class="gallery-card">
-          <img class="gallery-img" src="assets/img/movie.jpg" alt="חדר הקרנה ישן וסלילי פילם" loading="lazy" />
-          <figcaption class="credit">חדר הקרנה — <small>שימוש חופשי</small></figcaption>
-        </figure>
-        <figure class="gallery-card">
-          <img class="gallery-img" src="assets/img/projector.jpg" alt="עדשת מקרן זהובה וינטאז׳" loading="lazy" />
-          <figcaption class="credit">עדשת מקרן — <small>שימוש חופשי</small></figcaption>
-        </figure>
-        <!-- תמונת תומר (עם רקע שקוף) לשילוב בפינות האתר או ב-Hero -->
-        <figure class="gallery-card">
-          <img class="gallery-img" src="assets/img/TOMER.png" alt="תומר קמרלינג" loading="lazy" style="object-fit:contain; background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));" />
-          <figcaption class="credit">תומר קמרלינג — פורטרט</figcaption>
-        </figure>
-      </div>
-    </section>
+    
   </main>
 
   <footer class="footer">
